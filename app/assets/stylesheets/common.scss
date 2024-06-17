@@ -1,0 +1,37 @@
+header {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-bottom: 7px;
+}
+
+.partial {
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding: 1px;
+}
+
+a {
+    text-decoration:none; 
+}
+
+a.p-btn:visited {
+    color: white;
+}
+
+li{
+    list-style:none;
+    float:left;
+    margin-left: 1rem;
+}
+
+ul{
+    position: absolute;
+    display: flex;
+    display:inline-block;
+    right: 50px;
+    top: 15px;
+    padding: 0;
+    
+}
