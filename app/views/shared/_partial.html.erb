@@ -1,8 +1,10 @@
 <div class="partial">
   <h3><%= link_to '宿泊予約アプリ', root_path,class: "p-btn" %></h3>
+
   <ul>
     <% if user_signed_in? %>
       <li>
+        <%= link_to "マイページ", user_path(current_user), class: "p-btn" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "p-btn" %>
       </li>
     <% else %>
