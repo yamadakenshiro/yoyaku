@@ -7,17 +7,6 @@ class UsersController < ApplicationController
       @user = User.new
     end
 
-    def create
-      @user = User.new(user_params)
-      if @user.save
-        flash[:success] = "登録しました"
-        redirect_to :users
-      else
-        flash[:failure] = "登録に失敗しました"
-        render "new"
-      end  
-    end
-
     def show
       @user = current_user
     end
@@ -37,13 +26,6 @@ class UsersController < ApplicationController
       end
     end
 
-    def destroy
-      @user = User.find(params[:id])
-      @user.destroy
-      flash[delete]  = "削除しました"
-      redirect_to :users
-    end
-
     private
     def user_params
         params.require(:user).permit(
@@ -54,5 +36,11 @@ class UsersController < ApplicationController
             :password,
         )
     end
+
+    private
+
+  def test_params
+    params.require(:post).permit(:text, :image)
+  end
 
 end

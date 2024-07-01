@@ -1,9 +1,13 @@
 <%= render "shared/partial" %>
 <h3>マイページ</h3>
 
-<h3>ユーザー名</h3>
-<%= @user.name %>
+<%= image_tag @user.user_image %>
+
 <h3>メールアドレス</h3>
 <%= @user.email %>
-<h3>プロフィール</h3>
-<%= @user.profile%>
+<h3>パスワード</h3>
+<h3>*******</h3>
+
+<%if user_signed_in? && current_user.id == @user.id%>
+<%=link_to "アカウント情報の編集",edit_user_registration_path(current_user), class:"edi-user"%>
+<%end%> 
