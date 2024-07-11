@@ -34,3 +34,21 @@ ul{
     top: 15px;
     padding: 0;
 }
+
+.open, .close {
+    border: 1px solid #333333;
+    width: 70px;
+    cursor: pointer;
+    background-color: darkgray;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 130px;
+    background-color: lightgray;
+    display: none;
+}
