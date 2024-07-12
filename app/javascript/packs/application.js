@@ -18,10 +18,6 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-$(function(){
-    console.log("OK")
-})
-
 document.addEventListener('DOMContentLoaded', function(){
     $('.open').click(function(){
         $('.modal').fadeIn();
