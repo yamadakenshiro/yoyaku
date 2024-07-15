@@ -1,5 +1,6 @@
 {
   "name": "yoyaku",
+  "main": "index.js",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-methods": "^7.18.6",
