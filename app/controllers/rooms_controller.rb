@@ -8,7 +8,7 @@ class RoomsController < ApplicationController
     end
     
     def create
-      @room = Room.new(room_params)
+      @room = current_user.rooms.build(room_params)
       if @room.save
         flash[:success] = "登録しました"
         redirect_to :rooms
@@ -28,9 +28,9 @@ class RoomsController < ApplicationController
     
     def update
       @room = Room.find(params[:id])
-      if @user.update(user_params)
+      if @room.update(room_params)
         flash[:success] = "変更内容を更新しました"
-        redirect_to :show
+        redirect_to action: :show
       else
         flash[:failure] = "変更内容の更新に失敗しました"
         render "edit"
@@ -43,6 +43,16 @@ class RoomsController < ApplicationController
       flash[:delete] = "削除しました"
       redirect_to :rooms
     end
+
+    def search
+      if params[:address].present?
+       @rooms = Room.where(["address LIKE(?)", "%#{params[:address]}%"])
+      elsif params[:keyword].present? 
+       @rooms = Room.where(["room_name LIKE(?) OR room_introduction LIKE(?)", "%#{params[:keyword]}%", "%#{params[:keyword]}%"])
+      else
+       @rooms = Room.all
+      end
+    end
     
     private
     def room_params
@@ -51,7 +61,8 @@ class RoomsController < ApplicationController
         :introduction,
         :price,:address,
         :room_image,
-        :address
+        :address,
+        :user_id
         )
     end
 

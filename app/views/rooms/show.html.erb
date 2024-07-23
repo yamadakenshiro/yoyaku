@@ -1,0 +1,38 @@
+<%= render "shared/partial" %>
+
+<%= @room.title %>
+<%= form_with model: @room do |f| %>
+  <table border="1" style="border-collapse: collapse">
+    <tr>
+      <th>施設画像</th>
+      <td><%= image_tag @room.room_image.variant(resize: '300x300') if @room.room_image.attached? %></td>
+    </tr>
+
+    <tr>
+      <th>施設名</th>
+      <td><%= @room.title %></td>
+    </tr>
+
+    <tr>
+      <th>紹介文</th>
+      <td><%= @room.introduction %></td>
+    </tr>
+
+    <tr>
+      <th>宿泊料金</th>
+      <td><%= @room.price %></td>
+    </tr>
+
+    <tr>
+      <th>id</th>
+      <td><%= @room.user_id %></td>
+    </tr>
+  </table>
+<% end %>
+
+<% if current_user.id == @room.user_id %>
+  <%= link_to "施設編集", edit_room_path(@room) %>
+<% end %>
+<%= link_to "戻る", :back %>
+
+<div>ログイン中のid(確認用):<%= current_user.id %></div>

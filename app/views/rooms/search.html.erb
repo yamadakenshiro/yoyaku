@@ -1,0 +1,19 @@
+<%= render "shared/partial" %>
+
+<%= form_with url: search_rooms_path, method: :get, class: "search-form2", local: true do |f| %>
+    <%= f.text_field :address, :placeholder => "エリア名を入力" %>
+    <%= f.search_field :keyword, :placeholder => "キーワード名を入力" %>
+    <%= f.submit "検索", class: "search-button2" %>
+<% end %>
+  
+<p class = "number-count"><%= @rooms.count %>件が見つかりました。</p>
+    <% @rooms.each do |room| %>
+    <div class = "search-result">
+      <p class = "search-list"><%= image_tag room.room_image.variant(resize: '300x300') if room.room_image.attached? %></p>
+      <p class = "search-list"><%= room.title %></p>
+      <p class = "search-list"><%= room.address %></p>
+      <p class = "search-list"><%= room.introduction %></p>
+      <p class = "search-list"><%= room.price %>円</p>
+      <%= link_to "施設詳細はこちら", room_path(room)%>
+     </div>
+<% end %>

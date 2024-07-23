@@ -20,7 +20,6 @@
       <th>作成日</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -34,10 +33,12 @@
         <td><%= room.address %></td>
         <td><%= room.updated_at.to_s(:datetime_jp) %></td>
         <td><%= link_to "施設詳細", room_path(room) %></td>
-        <td><%= link_to "施設編集", edit_room_path(room) %></td>
         <td>
         <button class="open">削除</button>
         <div class="modal">
+          <p><%= room.title %></p>
+          <p><%= image_tag room.room_image.variant(resize: '100x100') if room.room_image.attached? %></p>
+          <p><%= room.price %>円</p>
           <p>本当削除しますか？</p>
           <button><%= link_to "削除", room, method: :delete %></button>
           <div class="close">閉じる</div>
