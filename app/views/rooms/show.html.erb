@@ -24,13 +24,13 @@
     </tr>
 
     <tr>
-      <th>id</th>
+      <th>登録したユーザーのid</th>
       <td><%= @room.user_id %></td>
     </tr>
   </table>
 <% end %>
 
-<% if current_user.id == @room.user_id %>
+<% if current_user.id ==  @room.user_id %>
   <%= link_to "施設編集", edit_room_path(@room) %>
 <% end %>
 <%= link_to "戻る", :back %>
