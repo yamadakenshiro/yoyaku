@@ -30,9 +30,30 @@
   </table>
 <% end %>
 
-<% if current_user.id ==  @room.user_id %>
+<% if current_user.id ==  @room.user_id.to_i %>
   <%= link_to "施設編集", edit_room_path(@room) %>
 <% end %>
+
+<p class = "introduction"><%= @room.introduction %></p>
+  
+<%= form_with(model: @reservations,url: confirm_reservation_path, local: true ) do |f| %>
+  
+  <%= f.hidden_field :title, value:current_user.id %>
+  
+  <%= f.hidden_field :title, value:@room.user_id %>
+  
+  <%= f.label :start_day, "チェックイン" %>
+  <%= f.date_select :start_day, use_month_numbers: true, date_separator:'/' %>
+  
+  <%= f.label :end_day, "チェックアウト" %>
+  <%= f.date_select :end_day, use_month_numbers: true, date_separator:'/', selected: Date.tomorrow %>
+  
+  <%= f.label :number, "人数" %>
+  <%= f.number_field :number, min: 1 %>
+  
+  <%= f.submit '予約する' %>
+  
+<% end %>
+
 <%= link_to "戻る", :back %>
 
-<div>ログイン中のid(確認用):<%= current_user.id %></div>

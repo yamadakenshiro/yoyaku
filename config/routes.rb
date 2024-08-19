@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     end
   end
   resources :reservations do
-    collection do
-      post :confirm
+    member do
+      post 'confirm', to: 'reservations#confirm'
     end
   end
   

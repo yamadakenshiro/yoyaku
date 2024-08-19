@@ -8,10 +8,26 @@ class ReservationsController < ApplicationController
     end
   
     def confirm
-      @reservation = Reservation.new(reservation_params)
-      if @reservation.invalid?
-        render :new
+      @room = Room.find(params[:id])
+      @reservation = Reservation.new(params.permit(:start_day, :end_day, :number, :stay_days, :room_id, :user_id))
+      @stay_days = (@reservation.end_day - @reservation.start_day)
+
+      if @stay_days < 1 && @reservation.number == nil 
+        flash[:notice] = "人数を入力してください。チェックアウト日はチェックイン日より前の日付では登録できません。"
+        redirect_to @room
+
+      elsif @stay_days < 1 
+        flash[:notice] = "チェックアウト日はチェックイン日より前の日付では登録できません。"
+        redirect_to @room
+
+      elsif @reservation.number == nil 
+        flash[:notice] = "人数を入力してください。"
+        redirect_to @room
+    
+      else
+        @total_amount_price = @stay_days * @room.price * @reservation.number
       end
+
     end
       
     def create
@@ -20,9 +36,7 @@ class ReservationsController < ApplicationController
       redirect_to @reservation
     end
       
-    def show
-      @reservation = Reservation.find(params[:id])
-    end
+    
       
     def edit
       @reservation = Reservation.find(params[:id])
@@ -36,6 +50,7 @@ class ReservationsController < ApplicationController
       else
         flash.now[:failure] = ""
         render "edit"
+      end
     end
       
     def destroy
