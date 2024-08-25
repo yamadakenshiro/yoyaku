@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       get 'search' => 'rooms#search'
     end
   end
-  resources :reservations do
+  resources :reservations, except: [:show] do
+    get "reservations/index" => "reservations#index"
     member do
       post 'confirm', to: 'reservations#confirm'
     end
