@@ -27,20 +27,24 @@
       <th>登録したユーザーのid</th>
       <td><%= @room.user_id %></td>
     </tr>
+
+    <tr>
+      <th>部屋のid</th>
+      <td><%= @room.id %></td>
+    </tr>
+
   </table>
 <% end %>
 
 <% if current_user.id ==  @room.user_id.to_i %>
   <%= link_to "施設編集", edit_room_path(@room) %>
 <% end %>
-
-<p class = "introduction"><%= @room.introduction %></p>
   
 <%= form_with(model: @reservations,url: confirm_reservation_path, local: true ) do |f| %>
   
-  <%= f.hidden_field :title, value:current_user.id %>
+  <%= f.hidden_field :user_id, value:current_user.id %>
   
-  <%= f.hidden_field :title, value:@room.user_id %>
+  <%= f.hidden_field :room_id, value:@room.id %>
   
   <%= f.label :start_day, "チェックイン" %>
   <%= f.date_select :start_day, use_month_numbers: true, date_separator:'/' %>

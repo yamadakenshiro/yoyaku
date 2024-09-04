@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
       @room = current_user.rooms.build(room_params)
       if @room.save
         flash[:success] = "登録しました"
+        room_id = @room.id
         redirect_to :rooms
       else
         flash[:failure] = "登録に失敗しました"
@@ -62,7 +63,8 @@ class RoomsController < ApplicationController
         :price,:address,
         :room_image,
         :address,
-        :user_id
+        :user_id,
+        :room_id
         )
     end
 

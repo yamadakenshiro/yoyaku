@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
   
     def confirm
       @room = Room.find(params[:id])
-      @reservation = Reservation.new(params.permit(:start_day, :end_day, :number, :stay_days, :room_id, :user_id))
+      @reservation = Reservation.new(params.permit(:start_day, :end_day, :number, :stay_days, :user_id))
       @stay_days = (@reservation.end_day - @reservation.start_day)/86400
 
       if @stay_days < 1 && @reservation.number == nil 
@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
     def create
       @reservation = Reservation.new(reservation_params)
       render :new and return if params[:back] || !@reservation.save
-      redirect_to @reservation
+      redirect_to action: :index
     end
   
     def edit
@@ -61,7 +61,6 @@ class ReservationsController < ApplicationController
     private
     def reservation_params
       params.require(:reservation).permit(
-        :room_id,
         :user_id,
         :start_day,
         :end_day,

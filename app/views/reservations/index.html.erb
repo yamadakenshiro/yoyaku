@@ -1,6 +1,4 @@
-<main class ="reservation-summary">
-
-  <h3>予約済み一覧</h3>
+<h3>予約済み一覧</h3>
   <table>
    <thead>
     <tr>
@@ -13,31 +11,20 @@
      <th>予約確定日時</th>
     </tr>
    </thead>
-  
+
    <tbody>
-    <% @reservations.each do |reservation| %>
-     <tr>
-      <td>
-       <% if reservation.room.image? %>
-        <%= image_tag reservation.room.image.url, size: '250x170' %>
-       <% else %> 
-        <%= image_tag ('/assets/room_default.png'), size: '250x170' %>
-       <% end %>
-      </td> 
-      <td><%= reservation.room.title %></td>
-      <td><%= reservation.room.introduction %></td>
-      <td>
-       ¥<%= reservation.price.to_i %>
-      </td>
-      <td><%= reservation.start_day.to_s(:date_jp) %></td>
-      <td><%= reservation.end_day.to_s(:date_jp) %></td>
-      <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
-      <td>
-       <%= button_to "予約を削除する",reservation_path(reservation.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-      </td>
-     </tr>
+      
+      <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.title %></td>
+        <td>¥<%= reservation.price.to_i %></td>
+        <td><%= reservation.start_day(:date_jp) %></td>
+        <td><%= reservation.end_day.to_s(:date_jp) %></td>
+        <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+        <td>
+        <%= button_to "予約を削除する",reservation_path(reservation.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+       </tr>
     <% end %>
    </tbody>
   </table>
-  
-</main>
