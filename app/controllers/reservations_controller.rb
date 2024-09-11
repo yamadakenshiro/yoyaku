@@ -6,10 +6,17 @@ class ReservationsController < ApplicationController
     def new
       @reservation = Reservation.new
     end
-  
+
+    def destroy
+      @reservation = Reservation.find(params[:id])
+      @reservation.destroy
+      flash[:delete] = "削除しました"
+      redirect_to :reservations
+    end
+
     def confirm
       @room = Room.find(params[:id])
-      @reservation = Reservation.new(params.permit(:start_day, :end_day, :number, :stay_days, :user_id))
+      @reservation = Reservation.new(params.permit(:start_day, :end_day, :number, :stay_days, :user_id, :room_id))
       @stay_days = (@reservation.end_day - @reservation.start_day)/86400
 
       if @stay_days < 1 && @reservation.number == nil 
@@ -32,8 +39,13 @@ class ReservationsController < ApplicationController
       
     def create
       @reservation = Reservation.new(reservation_params)
-      render :new and return if params[:back] || !@reservation.save
-      redirect_to action: :index
+      if @reservation.save
+        flash[:notice_create] = "登録しました。"
+        redirect_to :reservations
+      else
+        flash.now[:notice_no_create] = "登録できませんでした。"
+        render :index
+      end
     end
   
     def edit
@@ -51,13 +63,6 @@ class ReservationsController < ApplicationController
       end
     end
       
-    def destroy
-      @reservation = Reservation.find(params[:id])
-      @reservation.destroy
-      flash[:delete] = "削除しました"
-      redirect_to :reservations
-    end
-      
     private
     def reservation_params
       params.require(:reservation).permit(
@@ -65,7 +70,9 @@ class ReservationsController < ApplicationController
         :start_day,
         :end_day,
         :number,
-        :price
+        :price,
+        :room_id,
+        :total_amount_price
       )
     end
   

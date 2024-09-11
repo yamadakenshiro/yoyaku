@@ -40,7 +40,7 @@
   <%= link_to "施設編集", edit_room_path(@room) %>
 <% end %>
   
-<%= form_with(model: @reservations,url: confirm_reservation_path, local: true ) do |f| %>
+<%= form_with(model: @reservation,url: confirm_reservation_path, local: true ) do |f| %>
   
   <%= f.hidden_field :user_id, value:current_user.id %>
   
