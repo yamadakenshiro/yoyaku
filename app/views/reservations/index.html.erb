@@ -16,7 +16,9 @@
       
       <% @reservations.each do |reservation| %>
       <tr>
+        <td><%= image_tag reservation.room.room_image.variant(resize: '300x300') if reservation.room.room_image.attached? %></td>
         <td><%= reservation.room.title %></td>
+        <td><%= reservation.room.introduction %></td>
         <td>¥<%= reservation.total_amount_price.to_i %></td>
         <td><%= reservation.start_day.to_s(:date_jp) %></td>
         <td><%= reservation.end_day.to_s(:date_jp) %></td>
