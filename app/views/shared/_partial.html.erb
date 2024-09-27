@@ -1,11 +1,24 @@
 <div class="partial">
-  <h3><%= link_to '宿泊予約アプリ', root_path,class: "p-btn" %></h3>
+  <h3 class="h3"><%= link_to '宿泊予約アプリ', root_path,class: "title-btn" %></h3>
 
   <ul>
     <% if user_signed_in? %>
-      <li>
+      <li class="li-1">
         <%= link_to "マイページ", user_path(current_user), class: "p-btn" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "p-btn" %>
+        <%= image_tag current_user.user_image.variant(resize: '50x50') if current_user.user_image.attached? %>
+        <li class="li-2">
+          <div class="mypage-btn-container" id="mypageBtnContainer">
+            <label for="check"><%= current_user.name %></label>
+            <input type="checkbox"  id="check">
+            <div class="mypage-dropdown" id="mypageDropdown">
+              <ul class="list-dropdown">
+                <li><%= link_to '施設一覧', :rooms, class: "p-btn" %></li>
+                <li><%= link_to '予約一覧', :reservations, class: "p-btn" %></li>
+              </ul>
+            </div>
+          </div>
+        </li>
       </li>
     <% else %>
       <li>

@@ -60,6 +60,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     root_path
   end
 
+  def after_sign_out_path_for(resource)
+    tops_index_path
+  end
+
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
