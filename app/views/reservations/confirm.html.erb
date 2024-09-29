@@ -14,9 +14,9 @@
       <tr>
           <%= f.hidden_field :user_id, value:current_user.id %>
           <%= f.hidden_field :room_id, value:@room.id %>
-        <td><%= @reservation.start_day.to_s(:date_jp) %></td>
+        <td><%= @reservation.start_day.strftime("%Y年%m月%d日") %></td>
           <%= f.hidden_field :start_day %>
-        <td><%= @reservation.end_day.to_s(:date_jp) %></td>
+        <td><%= @reservation.end_day.strftime("%Y年%m月%d日") %></td>
           <%= f.hidden_field :end_day %>
         <td><%= @stay_days.to_i %></td>
           <%= f.hidden_field :stay_days, value:@stay_days %>

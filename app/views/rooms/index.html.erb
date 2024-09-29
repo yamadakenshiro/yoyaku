@@ -33,17 +33,7 @@
         <td><%= room.address %></td>
         <td><%= room.updated_at.to_s(:datetime_jp) %></td>
         <td><%= link_to "施設詳細", room_path(room) %></td>
-        <td>
-        <button class="open">削除</button>
-        <div class="modal">
-          <p><%= room.title %></p>
-          <p><%= image_tag room.room_image.variant(resize: '100x100') if room.room_image.attached? %></p>
-          <p><%= room.price %>円</p>
-          <p>本当削除しますか？</p>
-          <button><%= link_to "削除", room, method: :delete %></button>
-          <div class="close">閉じる</div>
-        </div>
-        </td>
+        <td><%= button_to "削除",room_path(room.id), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
       </tr>
     <% end %>
   </tbody>
