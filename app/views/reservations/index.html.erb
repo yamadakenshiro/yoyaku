@@ -1,3 +1,5 @@
+<%= render "shared/partial", user: @user %>
+
 <h3>予約済み一覧</h3>
   <table>
    <thead>
@@ -20,9 +22,9 @@
         <td><%= reservation.room.title %></td>
         <td><%= reservation.room.introduction %></td>
         <td>¥<%= reservation.total_amount_price.to_i %></td>
-        <td><%= reservation.start_day.to_s(:date_jp) %></td>
-        <td><%= reservation.end_day.to_s(:date_jp) %></td>
-        <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+        <td><%= reservation.start_day.strftime("%Y年%m月%d日") %></td>
+        <td><%= reservation.end_day.strftime("%Y年%m月%d日") %></td>
+        <td><%= reservation.created_at.strftime("%Y年%m月%d日%H時%M分") %></td>
         <td>
         <%= button_to "予約を削除する",reservation_path(reservation.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
         </td>
