@@ -6,10 +6,15 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+#config.active_storage.variant_processor = :mini_magick
+
+
 module Yoyaku
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.active_storage.variant_processor = :mini_magick
+    config.time_zone = 'Tokyo'
 
     # Configuration for the application, engines, and railties goes here.
     #

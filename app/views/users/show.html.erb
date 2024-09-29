@@ -1,0 +1,19 @@
+<%= render "shared/partial" %>
+<h3>マイページ</h3>
+
+<p><%= image_tag @user.user_image.variant(resize: '100x100') if @user.user_image.attached? %></p>
+
+<p><%= @user.comment %></p>
+
+<h3>メールアドレス</h3>
+<%= @user.email %>
+<h3>パスワード</h3>
+<h3>*******</h3>
+
+<%if user_signed_in? && current_user.id == @user.id%>
+<%=link_to "アカウント情報の編集",edit_user_registration_path(current_user), class:"edi-user"%>
+<%end%> 
+
+<%= link_to "施設一覧", :rooms %>
+
+<%= link_to "予約一覧", :reservations %>

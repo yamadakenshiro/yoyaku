@@ -1,0 +1,43 @@
+<% flash.each do |message_type, message| %>
+    <%= message %>
+<% end %>
+
+<h3>施設作成</h3>
+
+<%= form_with model: @room do |f| %>
+    <table>
+
+      <tr>
+        <th><%= f.label :room_image ,"施設画像" %></th>
+        <td><%= f.file_field :room_image %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :title ,"施設名" %></th>
+        <td><%= f.text_field :title %></td>
+      </tr>
+  
+      <tr>
+      <th><%= f.label :introduction ,"紹介文" %></th>
+      <td><%= f.text_area :introduction %></td>
+      </tr>
+  
+      <tr>
+      <th><%= f.label :address ,"住所" %></th>
+      <td><%= f.text_area :address %></td>
+      </tr>
+  
+      <tr>
+        <th><%= f.label :price ,"料金" %></th>
+        <td><%= f.number_field :price, class: "room_price", min: 1 %></td>
+      </tr>
+
+    </table>
+  
+    <div>
+      <ul>
+        <li><%= f.submit "登録完了"%></li>
+        <li><%= link_to "施設一覧に戻る", :rooms %></li>
+      </ul>
+    </div>
+  <% end %>

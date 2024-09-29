@@ -1,0 +1,40 @@
+<head>
+<script type="packs/javascript" src="application.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<%= render "shared/partial" %>
+
+<h3>施設一覧</h3>
+
+<p><%= link_to "施設の新規登録", :new_room %></p>
+
+<table border="1" style="border-collapse: collapse">
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>宿泊料金</th>
+      <th>住所</th>
+      <th>作成日</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= image_tag room.room_image.variant(resize: '100x100') if room.room_image.attached? %></td>
+        <td><%= room.title %></td>
+        <td><%= room.introduction %></td>
+        <td><%= room.price %></td>
+        <td><%= room.address %></td>
+        <td><%= room.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= link_to "施設詳細", room_path(room) %></td>
+        <td><%= button_to "削除",room_path(room.id), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
